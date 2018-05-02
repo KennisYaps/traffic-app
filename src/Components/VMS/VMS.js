@@ -15,7 +15,7 @@ class VMS extends Component {
           this.setState({
             VMSDatas: json.value
           });
-          console.log(this.state.VMSDatas);
+          //   console.log(this.state.VMSDatas);
         });
       } else {
         console.log("response is not okay");
@@ -25,9 +25,12 @@ class VMS extends Component {
   render() {
     return (
       <div>
-        Returns traffic advisories (via variable message services) concerning
-        current traffic conditions that are displayed on EMAS signboards along
-        expressways and arterial roads.
+        <h1>VMS</h1>
+        <p>
+          Returns traffic advisories (via variable message services) concerning
+          current traffic conditions that are displayed on EMAS signboards along
+          expressways and arterial roads.
+        </p>
       </div>
     );
   }

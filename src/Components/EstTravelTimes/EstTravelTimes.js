@@ -15,7 +15,7 @@ class EstTravelTimes extends Component {
           this.setState({
             EstTravelTimesDatas: json.value
           });
-          console.log(this.state.EstTravelTimesDatas);
+          //   console.log(this.state.EstTravelTimesDatas);
         });
       } else {
         console.log("response is not okay");
@@ -23,7 +23,11 @@ class EstTravelTimes extends Component {
     });
   }
   render() {
-    return <div>Estimated Travel Times of expressways (in segments).</div>;
+    return (
+      <div>
+        <h1>Estimated Travel Times of expressways (in segments).</h1>
+      </div>
+    );
   }
 }
 

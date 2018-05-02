@@ -15,7 +15,7 @@ class TrafficSpeedBands extends Component {
           this.setState({
             TrafficSpeedBandsDatas: json.value
           });
-          console.log(this.state.TrafficSpeedBandsDatas);
+          //   console.log(this.state.TrafficSpeedBandsDatas);
         });
       } else {
         console.log("response is not okay");
@@ -25,8 +25,11 @@ class TrafficSpeedBands extends Component {
   render() {
     return (
       <div>
-        Returns current traffic speeds on expressways and arterial roads,
-        expressed in speed bands.
+        <h1>Traffic Speed Bands</h1>
+        <p>
+          Returns current traffic speeds on expressways and arterial roads,
+          expressed in speed bands.
+        </p>
       </div>
     );
   }
