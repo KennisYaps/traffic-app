@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import fetchAPI from "../../utils/fetchAPI";
+import { fetchLTAData } from "../../utils/fetchAPI";
 class EstTravelTimes extends Component {
   constructor() {
     super();
@@ -9,16 +9,15 @@ class EstTravelTimes extends Component {
   }
 
   componentDidMount() {
-    fetchAPI("EstTravelTimes").then(response => {
+    fetchLTAData("EstTravelTimes").then(response => {
       if (response.ok) {
         response.json().then(json => {
           this.setState({
             EstTravelTimesDatas: json.value
           });
-          //   console.log(this.state.EstTravelTimesDatas);
         });
       } else {
-        console.log("response is not okay");
+        console.error("response is not okay");
       }
     });
   }

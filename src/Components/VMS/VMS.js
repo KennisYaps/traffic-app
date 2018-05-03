@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import fetchAPI from "../../utils/fetchAPI";
+import { fetchLTAData } from "../../utils/fetchAPI";
 class VMS extends Component {
   constructor() {
     super();
@@ -9,16 +9,15 @@ class VMS extends Component {
   }
 
   componentDidMount() {
-    fetchAPI("VMS").then(response => {
+    fetchLTAData("VMS").then(response => {
       if (response.ok) {
         response.json().then(json => {
           this.setState({
             VMSDatas: json.value
           });
-          //   console.log(this.state.VMSDatas);
         });
       } else {
-        console.log("response is not okay");
+        console.error("response is not okay");
       }
     });
   }

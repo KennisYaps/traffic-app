@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import fetchAPI from "../../utils/fetchAPI";
+import { fetchLTAData } from "../../utils/fetchAPI";
 class ERPRates extends Component {
   constructor() {
     super();
@@ -9,21 +9,15 @@ class ERPRates extends Component {
   }
 
   componentDidMount() {
-    fetchAPI("ERPRates").then(response => {
+    fetchLTAData("ERPRates").then(response => {
       if (response.ok) {
         response.json().then(json => {
           this.setState({
             ERP_RatesDatas: json.value
           });
-          console.log(
-            this.state.ERP_RatesDatas.map(rate => {
-              // console.log(rate.ZoneID);
-              return rate;
-            })
-          );
         });
       } else {
-        console.log("response is not okay");
+        console.error("response is not okay");
       }
     });
   }
