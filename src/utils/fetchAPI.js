@@ -3,7 +3,7 @@ const ONEMAP_EMAIL = process.env.REACT_APP_ONEMAP_EMAIL;
 const ONEMAP_PW = process.env.REACT_APP_ONEMAP_PW;
 const CORS_ANYWHERE_URL = `https://cors-anywhere.herokuapp.com/`;
 
-export const fetchLTAData = apiEndpoint => {
+const fetchLTAData = apiEndpoint => {
   return fetch(
     CORS_ANYWHERE_URL +
       `datamall2.mytransport.sg/ltaodataservice/${apiEndpoint}`,
@@ -73,19 +73,34 @@ export const getData = async endpoint => {
   }
 };
 
-const test = [
-  { Latitude: 1.2923784122598472, Longitude: 103.8436934274694 },
-  { Latitude: 1.3337418427143688, Longitude: 103.81353117504871 },
-  { Latitude: 1.3553132342549212, Longitude: 103.85682693417448 }
-];
-export const addBuildingName = async datas => {
-  const token = await getOneMapToken();
-  console.log("datas", datas);
-  datas.map(async data => {
-    let response = await reverseGeocode(data.Latitude, data.Longitude, token);
-    data.ROAD = response.ROAD;
-    console.log(response);
-    console.log(data);
-  });
+export const getSearchResults = async searchValues => {
+  const response = await fetch(
+    CORS_ANYWHERE_URL +
+      `developers.onemap.sg/commonapi/search?searchVal=${searchValues}&returnGeom=Y&getAddrDetails=Y`,
+    {
+      method: "get",
+      headers: {
+        Accept: "application/json"
+      }
+    }
+  );
+  if (response.ok) {
+    try {
+      const json = await response.json();
+      const totalSearchFound = json.found;
+      const resultsDisplayed = json.results;
+
+      if (totalSearchFound !== resultsDisplayed) {
+        const message = `Please indicate the full address if you did not manage to get the data\n +
+          ${resultsDisplayed}`;
+        return resultsDisplayed;
+      }
+      return resultsDisplayed;
+    } catch (error) {
+      console.error("Network error?");
+    }
+  } else {
+    console.error("Network error: Failed to get searched datas");
+  }
 };
-addBuildingName(test);
+
