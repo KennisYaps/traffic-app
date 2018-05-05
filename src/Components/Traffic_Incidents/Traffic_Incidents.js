@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { getData } from "../../utils/fetchAPI";
 import MapWithAMarkerClusterer from "../MapWithAMarkerClusterer";
-import { Input } from "semantic-ui-react";
-
+// import SearchExample from "../SearchExample";
+import SearchBar from "../SearchBar/SearchBar";
 class TrafficIncidents extends Component {
   constructor() {
     super();
@@ -15,10 +15,12 @@ class TrafficIncidents extends Component {
     return (
       <div>
         <h1>Traffic Incidents</h1>
-        <Input fluid loading={false} icon="search" placeholder="Search..." />
         <h4>The Incident Map</h4>
         <div>
+          <SearchBar trafficIncidentDatas={this.state.trafficIncidentsDatas} />{" "}
+          <br />
           <MapWithAMarkerClusterer markers={this.state.trafficIncidentsDatas} />
+          {/* <SearchExample fluid /> */}
         </div>
       </div>
     );
